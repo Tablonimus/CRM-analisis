@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaña prueba 13-5</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <style>
+      /* Estilo minimalista para botones cuadrados */
+      .btn-minimal {
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-minimal-success {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .btn-minimal-success:hover {
+        background-color: #218838;
+      }
+
+      .btn-minimal-warning {
+        background-color: #ffc107;
+        color: #212529;
+      }
+
+      .btn-minimal-warning:hover {
+        background-color: #e0a800;
+      }
+
+      /* Estilo minimalista para etiquetas */
+      .badge-minimal {
+        border-radius: 4px;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .badge-pink {
+        background-color: #ffc0cb;
+        color: #000;
+      }
+
+      .badge-blue {
+        background-color: #cce5ff;
+        color: #004085;
+      }
+
+      .badge-lime {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .btn-disabled {
+        background-color: #d6d6d6;
+        color: #6c757d;
+        cursor: not-allowed;
+      }
+
+      .btn-soledad {
+        background-color: #f8d7da;
+        color: #721c24;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">CRM Admin</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul
+          class="navbar-nav align-items-center d-flex justify-content-between w-100"
+        >
+          <div class="d-flex">
+            <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="/index.html">Campañas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contactos</a>
+            </li>
+          </div>
+          <div>
+            <!-- Usuario logueado -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle d-flex align-items-center"
+                href="#"
+                id="userDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://i.pravatar.cc/40?img=3"
+                  alt="Avatar"
+                  class="rounded-circle mr-2"
+                  width="32"
+                  height="32"
+                />
+                <span>Operador</span>
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="userDropdown"
+              >
+                <a class="dropdown-item" href="#">Mi perfil</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Cerrar sesión</a>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <h1 class="mb-4">Reactivación de socios</h1>
+
+      <!-- Socios por Llamar -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Socios por Llamar</h5>
+        </div>
+        <div class="card-body">
+          <!-- Tablas -->
+          <table id="llamarTable" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Operador</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5>Socios por Llamar</h5>
+        </div>
+        <div class="card-body">
+          <table id="rellamarTable" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Comentario</th>
+                <th>Operador</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Modal para gestionar -->
+    <div
+      class="modal fade"
+      id="gestionarModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="gestionarModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-info text-white">
+            <h5 class="modal-title" id="gestionarModalLabel">
+              Registrar Llamada
+            </h5>
+            <button
+              type="button"
+              class="close text-white"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="gestionarForm">
+              <div class="form-group">
+                <label for="contacto">Contacto:</label>
+                <select class="form-control" id="contacto" required>
+                  <option value="">----------</option>
+                  <option value="contactado">Contactado</option>
+                  <option value="no_contactado">No Contactado</option>
+                  <option value="llamar_mas_tarde">Llamar Más Tarde</option>
+                  <option value="sin_numero">
+                    No tiene Número de Contacto
+                  </option>
+                  <option value="fuera_servicio">
+                    Número Fuera de Servicio
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea
+                  class="form-control"
+                  id="descripcion"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <button type="button" class="btn btn-primary" id="guardarGestion">
+                Guardar
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Regresar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer>
+      // Arrays para manejar dinámicamente las filas de las tablas
+      let sociosPorLlamar = [
+        {
+          id: 193484,
+          nombre: "ESTELITA",
+          apellido: "SUAREZ",
+          dni: "36535555",
+          fechaNacimiento: "01-06-1992",
+          operador: "SOLEDAD",
+        },
+        {
+          id: 193485,
+          nombre: "VIRGINIA",
+          apellido: "FALON",
+          dni: "36535555",
+          fechaNacimiento: "01-06-1992",
+          operador: "TOMAR CONTACTO",
+        },
+        {
+          id: 193496,
+          nombre: "CIRO",
+          apellido: "ALEKSANDROFF",
+          dni: "52181319",
+          fechaNacimiento: "17-06-2012",
+          operador: "TOMAR CONTACTO",
+        },
+        {
+          id: 193497,
+          nombre: "GINO",
+          apellido: "ALEKSANDROFF",
+          dni: "37617543",
+          fechaNacimiento: "17-05-1993",
+          operador: "TOMAR CONTACTO",
+        },
+      ];
+
+      let sociosPorRellamar = [];
+
+      // Variable para rastrear si un contacto ya está asignado
+      let contactoAsignado = null;
+
+      // Función para renderizar las tablas
+      function renderTables() {
+        const llamarTableBody = document.querySelector("#llamarTable tbody");
+        const rellamarTableBody = document.querySelector(
+          "#rellamarTable tbody"
+        );
+
+        // Renderizar tabla de "Socios por Llamar"
+        llamarTableBody.innerHTML = "";
+        sociosPorLlamar.forEach((socio, index) => {
+          const isSoledad = socio.operador === "SOLEDAD";
+
+          llamarTableBody.innerHTML += `
+        <tr>
+          <td>${socio.id}</td>
+          <td>${socio.nombre}</td>
+          <td>${socio.apellido}</td>
+          <td>${socio.dni}</td>
+          <td>${socio.fechaNacimiento}</td>
+          <td>
+            <button 
+              class="btn btn-minimal ${
+                isSoledad ? "btn-soledad" : "btn-minimal-warning"
+              }" 
+              onclick="tomarContacto(this, ${index}, 'llamar')" 
+              ${isSoledad ? "disabled" : ""}>
+              ${isSoledad ? "NO DISPONIBLE" : "TOMAR CONTACTO"}
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-minimal btn-minimal-success btn-gestionar" onclick="abrirModal(${index}, 'llamar')" disabled>Gestionar</button>
+          </td>
+        </tr>
+      `;
+        });
+
+        // Renderizar tabla de "Socios por Rellamar"
+        rellamarTableBody.innerHTML = "";
+        sociosPorRellamar.forEach((socio, index) => {
+          rellamarTableBody.innerHTML += `
+        <tr>
+          <td>${socio.id}</td>
+          <td>${socio.nombre}</td>
+          <td>${socio.apellido}</td>
+          <td>${socio.dni}</td>
+          <td>${socio.fechaNacimiento}</td>
+          <td>${socio.comentario || "Sin comentario"}</td>
+          <td>
+            <button 
+              class="btn btn-minimal btn-minimal-warning" 
+              onclick="tomarContacto(this, ${index}, 'rellamar')">
+              TOMAR CONTACTO
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-minimal btn-minimal-success btn-gestionar" onclick="abrirModal(${index}, 'rellamar')" disabled>Gestionar</button>
+          </td>
+        </tr>
+      `;
+        });
+      }
+
+      // Función para manejar el clic en "TOMAR CONTACTO"
+      function tomarContacto(button, index, table) {
+        if (contactoAsignado) {
+          alert(
+            "Ya tienes un contacto asignado. Libéralo antes de asignarte otro."
+          );
+          return;
+        }
+
+        // Cambiar el estado del botón clickeado
+        button.textContent = "TOMADO";
+        button.classList.remove("btn-minimal-warning");
+        button.classList.add("btn-minimal-success");
+        button.disabled = true;
+
+        // Habilitar el botón "Gestionar" de la misma fila
+        const row = button.closest("tr");
+        const gestionarButton = row.querySelector(".btn-gestionar");
+        if (gestionarButton) {
+          gestionarButton.disabled = false;
+        }
+
+        // Deshabilitar los demás botones "TOMAR CONTACTO"
+        const allButtons = document.querySelectorAll(".btn-minimal-warning");
+        allButtons.forEach((btn) => {
+          if (btn !== button) {
+            btn.textContent = "NO DISPONIBLE";
+            btn.classList.remove("btn-minimal-warning");
+            btn.classList.add("btn-disabled");
+            btn.disabled = true;
+          }
+        });
+
+        // Marcar el contacto como asignado
+        contactoAsignado = { index, table };
+      }
+
+      // Función para abrir el modal
+      function abrirModal(index, table) {
+        const guardarButton = document.getElementById("guardarGestion");
+        guardarButton.setAttribute("data-index", index); // Guardar el índice del socio en el botón
+        guardarButton.setAttribute("data-table", table); // Guardar la tabla de origen
+        $("#gestionarModal").modal("show");
+      }
+
+      // Función para guardar la gestión
+      document
+        .getElementById("guardarGestion")
+        .addEventListener("click", function () {
+          const index = this.getAttribute("data-index");
+          const table = this.getAttribute("data-table");
+          const contacto = document.getElementById("contacto").value;
+          const comentario = document.getElementById("descripcion").value;
+
+          if (contacto === "llamar_mas_tarde" && table === "llamar") {
+            // Mover el socio a la tabla de "Socios por Rellamar"
+            const socio = sociosPorLlamar.splice(index, 1)[0];
+            socio.operador = "TOMAR CONTACTO"; // Cambiar operador a "TOMAR CONTACTO"
+            socio.comentario = comentario; // Agregar comentario
+            sociosPorRellamar.push(socio);
+          }
+
+          // Liberar el contacto asignado
+          contactoAsignado = null;
+
+          // Cerrar el modal y volver a renderizar las tablas
+          $("#gestionarModal").modal("hide");
+          renderTables();
+        });
+
+      // Renderizar las tablas al cargar la página
+      renderTables();
+    </script>
+  </body>
+</html>
