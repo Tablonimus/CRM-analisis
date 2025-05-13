@@ -294,57 +294,60 @@
         llamarTableBody.innerHTML = "";
         sociosPorLlamar.forEach((socio, index) => {
           const isSoledad = socio.operador === "SOLEDAD";
+          const isTaken =
+            contactoAsignado &&
+            contactoAsignado.index === index &&
+            contactoAsignado.table === "llamar";
 
           llamarTableBody.innerHTML += `
-        <tr>
-          <td>${socio.id}</td>
-          <td>${socio.nombre}</td>
-          <td>${socio.apellido}</td>
-          <td>${socio.dni}</td>
-          <td>${socio.fechaNacimiento}</td>
-          <td>
-            <button 
-              class="btn btn-minimal ${
-                isSoledad ? "btn-soledad" : "btn-minimal-warning"
-              }" 
-              onclick="tomarContacto(this, ${index}, 'llamar')" 
-              ${isSoledad ? "disabled" : ""}>
-              ${isSoledad ? "NO DISPONIBLE" : "TOMAR CONTACTO"}
-            </button>
-          </td>
-          <td>
-            <button class="btn btn-minimal btn-minimal-success btn-gestionar" onclick="abrirModal(${index}, 'llamar')" disabled>Gestionar</button>
-          </td>
-        </tr>
-      `;
+      <tr>
+        <td>${socio.id}</td>
+        <td>${socio.nombre}</td>
+        <td>${socio.apellido}</td>
+        <td>${socio.dni}</td>
+        <td>${socio.fechaNacimiento}</td>
+        <td>
+          <button 
+            class="btn btn-minimal ${
+              isSoledad ? "btn-soledad" : "btn-minimal-warning"
+            }" 
+            onclick="tomarContacto(this, ${index}, 'llamar')" 
+            ${isSoledad || isTaken ? "disabled" : ""}>
+            ${isSoledad ? "SOLEDAD" : isTaken ? "TOMADO" : "TOMAR CONTACTO"}
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-minimal btn-minimal-success btn-gestionar" onclick="abrirModal(${index}, 'llamar')" disabled>Gestionar</button>
+        </td>
+      </tr>
+    `;
         });
 
         // Renderizar tabla de "Socios por Rellamar"
         rellamarTableBody.innerHTML = "";
         sociosPorRellamar.forEach((socio, index) => {
           rellamarTableBody.innerHTML += `
-        <tr>
-          <td>${socio.id}</td>
-          <td>${socio.nombre}</td>
-          <td>${socio.apellido}</td>
-          <td>${socio.dni}</td>
-          <td>${socio.fechaNacimiento}</td>
-          <td>${socio.comentario || "Sin comentario"}</td>
-          <td>
-            <button 
-              class="btn btn-minimal btn-minimal-warning" 
-              onclick="tomarContacto(this, ${index}, 'rellamar')">
-              TOMAR CONTACTO
-            </button>
-          </td>
-          <td>
-            <button class="btn btn-minimal btn-minimal-success btn-gestionar" onclick="abrirModal(${index}, 'rellamar')" disabled>Gestionar</button>
-          </td>
-        </tr>
-      `;
+      <tr>
+        <td>${socio.id}</td>
+        <td>${socio.nombre}</td>
+        <td>${socio.apellido}</td>
+        <td>${socio.dni}</td>
+        <td>${socio.fechaNacimiento}</td>
+        <td>${socio.comentario || "Sin comentario"}</td>
+        <td>
+          <button 
+            class="btn btn-minimal btn-minimal-warning" 
+            onclick="tomarContacto(this, ${index}, 'rellamar')">
+            TOMAR CONTACTO
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-minimal btn-minimal-success btn-gestionar" onclick="abrirModal(${index}, 'rellamar')" disabled>Gestionar</button>
+        </td>
+      </tr>
+    `;
         });
       }
-
       // Función para manejar el clic en "TOMAR CONTACTO"
       function tomarContacto(button, index, table) {
         if (contactoAsignado) {
