@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrar Operadores Bolsa</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <style>
+      /* Estilos globales */
+      body {
+        font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+        font-weight: 300; /* Peso de fuente más ligero */
+        color: #495057; /* Color de texto más suave */
+      }
+
+      h5,
+      h6,
+      label {
+        font-size: 1.6rem; /* Tamaño más pequeño para encabezados */
+        font-weight: 600; /* Peso más fuerte para nombres y títulos */
+      }
+      p strong {
+        font-weight: 600; /* Más negrita para títulos dentro de párrafos */
+      }
+
+      .card-header-custom {
+        background-color: #17a2b8;
+        color: white;
+        font-weight: 400; /* Peso más ligero */
+        font-size: 1rem; /* Tamaño más pequeño */
+        padding: 10px;
+      }
+      p {
+        font-size: 0.85rem; /* Tamaño más pequeño para párrafos */
+        font-weight: 400; /* Peso más ligero para datos */
+      }
+
+      .badge {
+        font-size: 0.8rem; /* Tamaño más pequeño para badges */
+        font-weight: 600; /* Más negrita para badges */
+      }
+
+      .btn-primary-custom {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+        font-size: 0.85rem; /* Tamaño más pequeño para botones */
+        font-weight: 400; /* Peso más ligero */
+      }
+
+      .btn-primary-custom:hover {
+        background-color: #138496;
+        border-color: #117a8b;
+      }
+
+      .form-control {
+        font-size: 0.85rem; /* Tamaño más pequeño para inputs */
+        font-weight: 400; /* Peso más ligero */
+      }
+
+      p {
+        font-size: 0.85rem; /* Tamaño más pequeño para párrafos */
+        font-weight: 300; /* Peso más ligero */
+      }
+
+      label {
+        font-size: 0.85rem; /* Tamaño más pequeño para etiquetas */
+        font-weight: 400; /* Peso más ligero */
+      }
+      .btn-primary-custom {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+        font-size: 0.85rem; /* Tamaño más pequeño para botones */
+        font-weight: 600; /* Más negrita para botones */
+      }
+
+      .btn-primary-custom:hover {
+        background-color: #138496;
+        border-color: #117a8b;
+      }
+    </style>
+  </head>
+  <body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CRM Admin</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul
+            class="navbar-nav align-items-center d-flex justify-content-between w-100"
+          >
+            <div class="d-flex">
+              <li class="nav-item">
+                <a class="nav-link" href="./index_admin.html">Campañas</a>
+              </li>
+            </div>
+            <div>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://i.pravatar.cc/40?img=3"
+                    alt="Avatar"
+                    class="rounded-circle mr-2"
+                    width="32"
+                    height="32"
+                  />
+                  <span>ADMIN C.Unix</span>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="userDropdown"
+                >
+                  <a class="dropdown-item" href="index.html"
+                    >Vista S. Garay</a
+                  >
+                  <div class="dropdown-divider"></div>
+                </div>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <div class="content-wrapper pt-3">
+        <div class="container px-5">
+          <!-- Estadísticas de la campaña -->
+          <div class="card mb-3">
+            <div class="card-header card-header-custom">
+              Saludo de cumpleaños
+            </div>
+            <div
+              class="card-body"
+              style="padding-left: 20px; padding-right: 20px"
+            >
+              <div class="row">
+                <div class="col-md-6">
+                  <h3>Saludo de cumpleaños</h3>
+                  <p><strong>Llamadas asignadas:</strong> 3</p>
+                  <p><strong>Llamadas activas:</strong> 3</p>
+                  <p><strong>Llamadas finalizadas:</strong> 0</p>
+                  <p><strong>Llamadas compromiso de llamada:</strong> 0</p>
+                </div>
+                <div class="col-md-6">
+                  <canvas id="donutChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lista de Operadores -->
+          <div class="card">
+            <div class="card-header card-header-custom">
+              Lista de Operadores
+            </div>
+            <div class="card-body">
+              <!-- Operador 1 -->
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <!-- Información del operador -->
+                    <div class="col-md-5">
+                      <p>
+                        <strong>Estado:</strong>
+                        <span class="badge badge-success">Activo</span>
+                      </p>
+                      <h5>Garay, Soledad</h5>
+                      <p><strong>Llamadas asignadas:</strong> 2</p>
+                      <p><strong>Llamadas activas:</strong> 2</p>
+                      <p><strong>Llamadas finalizadas:</strong> 0</p>
+                      <p><strong>Llamadas compromiso de llamada:</strong> 0</p>
+                      <p><i class="fas fa-user"></i> Usuario: s.garay</p>
+                      <p>
+                        <i class="fas fa-envelope"></i> Email:
+                        s.garay@clubtalleres.com.ar
+                      </p>
+                    </div>
+                    <!-- Gráfico -->
+                    <div class="col-md-4 d-flex align-items-center">
+                      <canvas id="barChart1" style="max-height: 150px"></canvas>
+                    </div>
+                    <!-- Formulario de administración -->
+                    <div class="col-md-3">
+                      <h6>Administrar</h6>
+                      <span class="badge badge-success mb-2">Activo</span>
+
+                      <div class="form-group">
+                        <label for="operador1">Operador</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="operador1"
+                          placeholder="Nombre del operador"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="cantidad1">Cantidad</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="cantidad1"
+                          placeholder="Cantidad de llamadas"
+                        />
+                      </div>
+                      <button
+                        class="btn btn-primary-custom btn-block text-white"
+                      >
+                        Reasignar llamadas
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Operador 2 -->
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <!-- Información del operador -->
+                    <div class="col-md-5">
+                      <p>
+                        <strong>Estado:</strong>
+                        <span class="badge badge-success">Activo</span>
+                      </p>
+                      <h5>Luiero, Micaela</h5>
+                      <p><strong>Llamadas asignadas:</strong> 1</p>
+                      <p><strong>Llamadas activas:</strong> 0</p>
+                      <p><strong>Llamadas finalizadas:</strong> 1</p>
+                      <p><strong>Llamadas compromiso de llamada:</strong> 0</p>
+                      <p><i class="fas fa-user"></i> Usuario: m.luiero</p>
+                      <p>
+                        <i class="fas fa-envelope"></i> Email:
+                        m.luiero@clubtalleres.com.ar
+                      </p>
+                    </div>
+                    <!-- Gráfico -->
+                    <div class="col-md-4 d-flex align-items-center">
+                      <canvas id="barChart2" style="max-height: 150px"></canvas>
+                    </div>
+                    <!-- Formulario de administración -->
+                    <div class="col-md-3">
+                      <h6>Administrar</h6>
+                      <span class="badge badge-success mb-2">Activo</span>
+
+                      <div class="form-group">
+                        <label for="operador2">Operador</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="operador2"
+                          placeholder="Nombre del operador"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="cantidad2">Cantidad</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="cantidad2"
+                          placeholder="Cantidad de llamadas"
+                        />
+                      </div>
+                      <button
+                        class="btn btn-primary-custom btn-block text-white"
+                      >
+                        Reasignar llamadas
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Operador 3 -->
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <!-- Información del operador -->
+                    <div class="col-md-5">
+                      <p>
+                        <strong>Estado:</strong>
+                        <span class="badge badge-success">Activo</span>
+                      </p>
+                      <h5>Martínez, Juan</h5>
+                      <p><strong>Llamadas asignadas:</strong> 3</p>
+                      <p><strong>Llamadas activas:</strong> 1</p>
+                      <p><strong>Llamadas finalizadas:</strong> 2</p>
+                      <p><strong>Llamadas compromiso de llamada:</strong> 0</p>
+                      <p><i class="fas fa-user"></i> Usuario: j.martinez</p>
+                      <p>
+                        <i class="fas fa-envelope"></i> Email:
+                        j.martinez@clubtalleres.com.ar
+                      </p>
+                    </div>
+                    <!-- Gráfico -->
+                    <div class="col-md-4 d-flex align-items-center">
+                      <canvas id="barChart3" style="max-height: 150px"></canvas>
+                    </div>
+                    <!-- Formulario de administración -->
+                    <div class="col-md-3">
+                      <h6>Administrar</h6>
+                      <span class="badge badge-success mb-2">Activo</span>
+
+                      <div class="form-group">
+                        <label for="operador3">Operador</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="operador3"
+                          placeholder="Nombre del operador"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="cantidad3">Cantidad</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="cantidad3"
+                          placeholder="Cantidad de llamadas"
+                        />
+                      </div>
+                      <button
+                        class="btn btn-primary-custom btn-block text-white"
+                      >
+                        Reasignar llamadas
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      // Donut Chart actualizado
+      const ctx = document.getElementById("donutChart").getContext("2d");
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Rellamadas", "Activas", "Finalizadas"],
+          datasets: [
+            {
+              data: [5, 3, 3], // Datos actualizados
+              backgroundColor: [
+                "rgba(220, 53, 69, 0.2)", // Rojo transparente
+                "rgba(23, 162, 184, 0.2)", // Azul transparente
+                "rgba(138, 43, 226, 0.2)", // Violeta transparente
+              ],
+              borderColor: ["#DC3545", "#17a2b8", "#8A2BE2"], // Bordes sólidos
+              borderWidth: 2, // Grosor del borde
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: "top", // Posición de la leyenda
+            },
+          },
+        },
+      });
+    </script>
+
+    <script>
+      function toggleEstado(switchElement) {
+        const estadoTexto = document.getElementById("estadoTexto1");
+        if (switchElement.checked) {
+          estadoTexto.textContent = "Activo";
+          estadoTexto.classList.remove("badge-danger");
+          estadoTexto.classList.add("badge-success");
+        } else {
+          estadoTexto.textContent = "Pausado";
+          estadoTexto.classList.remove("badge-success");
+          estadoTexto.classList.add("badge-danger");
+        }
+      }
+    </script>
+    <script>
+      // Gráfico de barras para Operador 1
+      const ctx1 = document.getElementById("barChart1").getContext("2d");
+      new Chart(ctx1, {
+        type: "bar",
+        data: {
+          labels: ["Activas", "Rellamadas", "Finalizadas"],
+          datasets: [
+            {
+              label: "Llamadas",
+              data: [2, 0, 0],
+              backgroundColor: "rgba(23, 162, 184, 0.2)", // Color transparente
+              borderColor: "#17a2b8", // Borde sólido
+              borderWidth: 2, // Grosor del borde
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      // Gráfico de barras para Operador 2
+      const ctx2 = document.getElementById("barChart2").getContext("2d");
+      new Chart(ctx2, {
+        type: "bar",
+        data: {
+          labels: ["Activas", "Rellamadas", "Finalizadas"],
+          datasets: [
+            {
+              label: "Llamadas",
+              data: [0, 0, 1],
+              backgroundColor: "rgba(220, 53, 69, 0.2)", // Color transparente
+              borderColor: "#dc3545", // Borde sólido
+              borderWidth: 2, // Grosor del borde
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      // Gráfico de barras para Operador 3
+      const ctx3 = document.getElementById("barChart3").getContext("2d");
+      new Chart(ctx3, {
+        type: "bar",
+        data: {
+          labels: ["Activas", "Rellamadas", "Finalizadas"],
+          datasets: [
+            {
+              label: "Llamadas",
+              data: [1, 0, 2],
+              backgroundColor: "rgba(23, 162, 184, 0.2)", // Color transparente
+              borderColor: "#17a2b8", // Borde sólido
+              borderWidth: 2, // Grosor del borde
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

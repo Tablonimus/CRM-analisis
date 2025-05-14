@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bolsa de Trabajo - CRM</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"
+    />
+    <style>
+      .status-indicator {
+        padding: 4px 8px;
+        border-radius: 5px;
+        color: white;
+      }
+      .status-completed {
+        background-color: #28a745;
+      }
+      .status-progress {
+        background-color: #ffc107;
+        color: #212529;
+      }
+    </style>
+  </head>
+  <body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CRM Admin</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul
+            class="navbar-nav align-items-center d-flex justify-content-between w-100"
+          >
+            <div class="d-flex">
+              <!-- <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="./index_admin.html">Campañas</a>
+              </li>
+              <li class="nav-item">
+                <!-- <a class="nav-link" href="#">Contactos</a> -->
+              </li>
+            </div>
+            <div>
+              <!-- Usuario logueado -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://i.pravatar.cc/40?img=3"
+                    alt="Avatar"
+                    class="rounded-circle mr-2"
+                    width="32"
+                    height="32"
+                  />
+                  <span>ADMIN C.Unix</span>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="userDropdown"
+                >
+                  <a class="dropdown-item" href="index.html"
+                    >Vista S. Garay</a
+                  >
+                  <div class="dropdown-divider"></div>
+                </div>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!--  action="/enviar_email" -->
+
+    <div class="container">
+      <div class="wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Crear Campaña</h1>
+              </div>
+              <div class="col-sm-6"></div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+      </div>
+      <!-- /.card -->
+      <div class="card card-info">
+        <div class="card-header">
+          <h3 class="card-title">Datos de Campaña</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="form-horizontal">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-5 col-form-label"
+                    >Nombre de la Campaña:*</label
+                  >
+                  <div class="col-sm-7">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="nombre"
+                      id="nombre"
+                      placeholder="Ingrese nombre de la campaña"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group row">
+                  <label
+                    for="exampleSelectRounded0"
+                    class="col-sm-2 col-form-label"
+                    >Tipo:*</label
+                  >
+                  <div class="col-sm-10">
+                    <select
+                      class="campania_select custom-select rounded-0"
+                      name="tipo"
+                      id="tipo"
+                    >
+                      <option value="0">Televenta</option>
+                      <option value="2">Televenta Bolsa</option>
+                      <option value="1">Email</option>
+                      <!--<option value="2">Web</option>-->
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-4 col-form-label"
+                    >Fecha de Inicio:*</label
+                  >
+                  <div class="col-sm-8">
+                    <input
+                      type="date"
+                      class="form-control"
+                      name="fecha_inicio"
+                      id="fecha_inicio"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group row">
+                  <label
+                    for="exampleSelectRounded0"
+                    class="col-sm-4 col-form-label"
+                    >Hora de Inicio:*</label
+                  >
+                  <div class="col-sm-8">
+                    <input
+                      type="time"
+                      class="form-control"
+                      name="hora_inicio"
+                      id="hora_inicio"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group row">
+                  <label
+                    for="exampleSelectRounded0"
+                    class="col-sm-2 col-form-label"
+                    >Estado:*</label
+                  >
+                  <div class="col-sm-10">
+                    <select
+                      class="custom-select rounded-0"
+                      name="estado"
+                      id="estado"
+                    >
+                      <option value="2">Planificación</option>
+                      <option value="1">Activa</option>
+                      <option value="0">Inactiva</option>
+                      <option value="3">Completa</option>
+                      <option value="4">Pausada</option>
+                      <option value="5">En proceso</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form-group row">
+                  <label
+                    for="exampleSelectRounded0"
+                    class="col-sm-3 col-form-label"
+                    >Prioridad:*</label
+                  >
+                  <div class="col-sm-9">
+                    <select
+                      class="custom-select rounded-0"
+                      name="prioridad"
+                      id="prioridad"
+                    >
+                      <option value="0">Baja</option>
+                      <option value="1">Media</option>
+                      <option value="2">Alta</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="campania_televenta">
+              <!-- INICIO Tipo Televenta, value: 0 -->
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-sm-4 col-form-label"
+                      >Central Telefónica:*</label
+                    >
+                    <div class="col-sm-8">
+                      <select
+                        class="custom-select rounded-0"
+                        name="central_telefonica"
+                        id="central_telefonica"
+                      ></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="form-group row">
+                    <label for="select_tipo" class="col-sm-4"
+                      ><strong>Ejecutar Ahora:</strong></label
+                    >
+                    <div class="col-sm-8">
+                      <input id="ejectuar_ahora" type="checkbox" />
+                    </div>
+                    <input id="id_lista_vinculada" type="hidden" value="" />
+                    <input id="listado_ids" type="hidden" value="" />
+                  </div>
+                </div>
+              </div>
+              <!--* corte botones de vincular lista y asignar operador *-->
+            </div>
+
+            <div class="row">
+              <div class="col-xl-6">
+                <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-4 col-form-label"
+                    >Descripción:*</label
+                  >
+                  <div class="col-sm-8">
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      name="descripcion"
+                      id="descripcion"
+                      placeholder="Ingrese una descripción"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="form row">
+                  <div class="col"></div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-2">
+                <a
+                  class="btn btn-app bg-navy color-palette text-sm"
+                  id="vincular_lista"
+                  style="width: auto"
+                >
+                  <i class="fas fa-list-ol"></i><strong>Vincular Lista</strong>
+                </a>
+              </div>
+              <div class="col-xl-2" id="ver_asignar_operador">
+                <a
+                  class="btn btn-app bg-lightblue color-palette text-sm"
+                  id="btn_asignar_operadores"
+                  style="white-space: nowrap; width: auto"
+                >
+                  <i class="fas fa-users"></i
+                  ><strong>Asignar Operadores</strong>
+                </a>
+              </div>
+              <div class="col-xl-2" id="ver_asignar_operador_bolsa">
+                <a
+                  class="btn btn-app bg-lightblue color-palette text-sm"
+                  id="btn_asignar_operadores_bolsa"
+                  style="white-space: nowrap; width: fit-content"
+                >
+                  <i class="fas fa-users"></i
+                  ><strong>Asignar Operadores a Bolsa</strong>
+                </a>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="row">
+                    <div class="col-xl-6"></div>
+                    <div class="col-xl-6 text-right">
+                      <a href="./index_admin.html">
+                        <button
+                          type="submit"
+                          class="btn btn-info"
+                          id="btn_guardar"
+                        >
+                          Guardar
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-6">
+                  <div class="row">
+                    <div class="col-xl-6 text-left">
+                      <a href="./index_admin.html">
+                        <button
+                          type="button"
+                          class="btn btn-default"
+                          id="btn_regresar"
+                        >
+                          Regresar
+                        </button>
+                      </a>
+                    </div>
+                    <div class="col-xl-6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-footer -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.fin container -->
+      </div>
+    </div>
+    <footer class="main-footer">
+      <div class="float-right d-none d-sm-block"><b>Version</b> 1.0.0</div>
+      <strong>Copyright © 2021 <a href="#">CRM</a>.</strong> All rights
+      reserved.
+    </footer>
+    <!-- Modal -->
+    <div
+      id="modal_vincular_lista"
+      class="modal fade bd-example-modal-xl"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Vincular Lista
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="form-group row">
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    id="btn_vincular_lista"
+                  >
+                    Vincular lista
+                  </button>
+                  <div class="col-sm-10"></div>
+                </div>
+              </div>
+              <div class="col-xl-6"></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <form id="form_table" method="POST">
+                  <table width="100%" border="0" id="lista_listas">
+                    <tbody>
+                      <thead>
+                        <tr>
+                          <th>Seleccionar</th>
+                          <th>Nombre</th>
+                          <th>Descripción</th>
+                          <th>Tipo</th>
+                          <th>Creada</th>
+                          <th>Cantidad</th>
+                          <th>Id</th>
+                        </tr>
+                      </thead>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div
+      id="modal_asignar_empleados"
+      class="modal fade bd-example-modal-xl"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myLargeModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">
+              Asignar empleados
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="form-group row">
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    id="btn_asignar_empleados"
+                  >
+                    Asignar empleados
+                  </button>
+                  <div class="col-sm-10"></div>
+                </div>
+              </div>
+              <div class="col-xl-6"></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <form id="form_table" method="POST">
+                  <table width="100%" border="0" id="lista_empleados">
+                    <tbody>
+                      <thead>
+                        <tr>
+                          <th><input id="checkbox_all" type="checkbox" /></th>
+                          <th>Apellido</th>
+                          <th>Nombre</th>
+                          <th>DNI</th>
+                          <th>Fecha de Nacimiento</th>
+                          <th>Id</th>
+                        </tr>
+                      </thead>
+                    </tbody>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+    <div
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="mySmallModalLabel"
+      aria-hidden="true"
+      id="modal_confirmacion"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content bg-info">
+          <div class="modal-header">
+            <h4 class="modal-title">Confirmación</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <span id="contenido_modal"></span>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-light"
+              id="btn_modal"
+              data-dismiss="modal"
+            >
+              Aceptar
+            </button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <!-- /.modal-content -->
+    <div
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="mySmallModalLabel"
+      aria-hidden="true"
+      id="modal_loading"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content bg-info">
+          <div class="modal-header">
+            <h4 class="modal-title">Aguarde un momento por favor...</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="fa-3x">
+              <i class="fas fa-cog fa-spin"></i>
+            </div>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const tipoSelect = document.getElementById("tipo");
+        const btnAsignarOperadores = document.getElementById(
+          "btn_asignar_operadores"
+        );
+        const btnAsignarOperadoresBolsa = document.getElementById(
+          "btn_asignar_operadores_bolsa"
+        );
+
+        // Función para mostrar/ocultar botones según el tipo seleccionado
+        function actualizarBotones() {
+          const tipoSeleccionado = tipoSelect.value;
+
+          if (tipoSeleccionado === "0") {
+            // Televenta
+            btnAsignarOperadores.style.display = "block";
+            btnAsignarOperadoresBolsa.style.display = "none";
+          } else if (tipoSeleccionado === "2") {
+            // Televenta Bolsa
+            btnAsignarOperadores.style.display = "none";
+            btnAsignarOperadoresBolsa.style.display = "block";
+          } else {
+            // Otros tipos
+            btnAsignarOperadores.style.display = "none";
+            btnAsignarOperadoresBolsa.style.display = "none";
+          }
+        }
+
+        // Escuchar cambios en el campo de selección
+        tipoSelect.addEventListener("change", actualizarBotones);
+
+        // Inicializar los botones al cargar la página
+        actualizarBotones();
+      });
+    </script>
+  </body>
+</html>

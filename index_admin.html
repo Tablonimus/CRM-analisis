@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bolsa de Trabajo - CRM</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #3498db;
+        --secondary-color: #6c757d;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+        --border-color: #e0e0e0;
+        --text-color: #495057;
+        --text-light: #6c757d;
+        --success-color: #28a745;
+        --warning-color: #ffc107;
+        --danger-color: #dc3545;
+        --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      table.table td,
+      table.table th {
+        border-right: none !important; /* Elimina las líneas verticales */
+      }
+      .buttons-wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+      }
+
+      .btn-action {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border-radius: 50%;
+      }
+
+      .btn-view {
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+      }
+
+      .btn-view-tab {
+        color: var(--success-color);
+        border: 1px solid var(--success-color);
+      }
+
+      .btn-edit {
+        color: var(--warning-color);
+        border: 1px solid var(--warning-color);
+      }
+
+      .btn-history {
+        color: var(--secondary-color);
+        border: 1px solid var(--secondary-color);
+      }
+
+      .btn-view:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .btn-view-tab:hover {
+        background-color: var(--success-color);
+        color: white;
+      }
+
+      .btn-edit:hover {
+        background-color: var(--warning-color);
+        color: var(--dark-color);
+      }
+
+      .btn-history:hover {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+
+      .status-indicator {
+        padding: 4px 8px;
+        border-radius: 5px;
+        color: white;
+      }
+      .status-completed {
+        background-color: #28a745;
+      }
+      .status-progress {
+        background-color: #ffc107;
+        color: #212529;
+      }
+    </style>
+  </head>
+  <body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+      <!-- Navbar -->
+      <nav class="main-header navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">CRM Admin</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul
+            class="navbar-nav align-items-center d-flex justify-content-between w-100"
+          >
+            <div class="d-flex">
+              <!-- <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="#">Campañas</a>
+              </li>
+              <li class="nav-item">
+                <!-- <a class="nav-link" href="#">Contactos</a> -->
+              </li>
+            </div>
+            <div>
+              <!-- Usuario logueado -->
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle d-flex align-items-center"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://i.pravatar.cc/40?img=3"
+                    alt="Avatar"
+                    class="rounded-circle mr-2"
+                    width="32"
+                    height="32"
+                  />
+                  <span>ADMIN C.Unix</span>
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="userDropdown"
+                >
+                  <a class="dropdown-item" href="index.html">Vista S. Garay</a>
+                  <div class="dropdown-divider"></div>
+                </div>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <div class="content-wrapper pt-3">
+        <div class="container-fluid">
+          <div class="content-header">
+            <h1 class="mb-3">Gestión campañas</h1>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <div style="display: flex; gap: 0.5rem">
+                  <a href="./crear_campania.html">
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary rounded-pill px-3 py-2"
+                      id="btn_crear"
+                      style="
+                        font-size: 0.9rem;
+                        border-width: 1px;
+                        white-space: nowrap;
+                      "
+                    >
+                      Crear Campaña
+                    </button>
+                  </a>
+                  <button
+                    type="button"
+                    class="btn btn-outline-secondary rounded-pill px-3 py-2"
+                    id="btn_crear_excel"
+                    style="
+                      font-size: 0.9rem;
+                      border-width: 1px;
+                      white-space: nowrap;
+                    "
+                  >
+                    Campaña por Excel
+                  </button>
+                </div>
+              </div>
+              <div class="tab-content" id="myTabContent">
+                <!-- Asignadas -->
+                <div
+                  class="tab-pane fade show active pt-3"
+                  id="pull"
+                  role="tabpanel"
+                >
+                  <table class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Campaña</th>
+                        <th>Inicio</th>
+                        <th>Descripción</th>
+                        <th>Estado</th>
+                        <th>Prioridad</th>
+                        <th>Tipo</th>
+                        <th>Acción</th>
+                        <th>Administrar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Ejemplo 1 -->
+                      <tr>
+                        <td>1693</td>
+                        <td>Reactivación de socios</td>
+                        <td>13-05-2025</td>
+                        <td>
+                          Campaña de Reactivación de socios con asignación en
+                          bolsa.
+                        </td>
+                        <td><span class="badge badge-success">Activa</span></td>
+                        <td><span class="badge badge-warning">Baja</span></td>
+                        <td>Televenta Bolsa</td>
+                        <td>
+                          <button
+                            class="btn btn-secondary btn-sm"
+                            data-toggle="tooltip"
+                            title="Gestionar campaña en bolsa"
+                          >
+                            <i class="fas fa-cog"></i>
+                          </button>
+                        </td>
+                        <td>
+                          <div class="buttons-wrapper">
+                            <button
+                              type="button"
+                              class="btn-action btn-edit editar btn-sm"
+                              onclick="ver(1693)"
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Administrar Campaña"
+                            >
+                              <i class="fas fa-tools"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn-action btn-view ver btn-sm"
+                              onclick="ver_lista(1693)"
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Lista de socios"
+                            >
+                              <i class="fas fa-list-ol"></i>
+                            </button>
+                            <a href="./administrar_operadores_bolsa.html">
+                              <button
+                                type="button"
+                                class="btn-action btn-history historico btn-sm"
+                                onclick="ver_estadistica(1693)"
+                                data-toggle="tooltip"
+                                data-placement="right"
+                                title="Administrar Operadores"
+                              >
+                                <i class="fas fa-user"></i>
+                              </button>
+                            </a>
+                            <button
+                              type="button"
+                              class="btn-action btn-view-tab ver_tab btn-sm"
+                              onclick="reporte_lista_emails(1693)"
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Exportar Campaña"
+                            >
+                              <i class="fas fa-file-excel fa-fw"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <!-- Ejemplo 2 -->
+                      <tr>
+                        <td>1693</td>
+                        <td>Saludo de cumpleaños</td>
+                        <td>13-05-2025</td>
+                        <td>
+                          Campaña con asignación de socios manual a operadores.
+                        </td>
+                        <td><span class="badge badge-success">Activa</span></td>
+                        <td><span class="badge badge-warning">Baja</span></td>
+                        <td>Televenta</td>
+                        <td>
+                          <button
+                            class="btn btn-secondary btn-sm"
+                            data-toggle="tooltip"
+                            title="Gestionar campaña"
+                          >
+                            <i class="fas fa-cog"></i>
+                          </button>
+                        </td>
+                        <td>
+                          <div class="buttons-wrapper">
+                            <button
+                              type="button"
+                              class="btn-action btn-edit editar btn-sm"
+                              onclick="ver(1693)"
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Administrar Campaña"
+                            >
+                              <i class="fas fa-tools"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="btn-action btn-view ver btn-sm"
+                              onclick="ver_lista(1693)"
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Lista de socios"
+                            >
+                              <i class="fas fa-list-ol"></i>
+                            </button>
+                            <a href="./administrar_operadores.html">
+                              <button
+                                type="button"
+                                class="btn-action btn-history historico btn-sm"
+                                data-toggle="tooltip"
+                                data-placement="right"
+                                title="Administrar Operadores"
+                              >
+                                <i class="fas fa-user"></i>
+                              </button>
+                            </a>
+                            <button
+                              type="button"
+                              class="btn-action btn-view-tab ver_tab btn-sm"
+                              onclick="reporte_lista_emails(1693)"
+                              data-toggle="tooltip"
+                              data-placement="right"
+                              title="Exportar Campaña"
+                            >
+                              <i class="fas fa-file-excel fa-fw"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+  </body>
+</html>
