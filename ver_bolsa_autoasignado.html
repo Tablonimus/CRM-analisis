@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campaña prueba 13-5</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    />
+    <style>
+      /* Estilo minimalista para botones cuadrados */
+      .btn-minimal {
+        border: none;
+        border-radius: 4px;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .btn-minimal-success {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .btn-minimal-success:hover {
+        background-color: #218838;
+      }
+
+      .btn-minimal-warning {
+        background-color: #ffc107;
+        color: #212529;
+      }
+
+      .btn-minimal-warning:hover {
+        background-color: #e0a800;
+      }
+
+      /* Estilo minimalista para etiquetas */
+      .badge-minimal {
+        border-radius: 4px;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .badge-pink {
+        background-color: #ffc0cb;
+        color: #000;
+      }
+
+      .badge-blue {
+        background-color: #cce5ff;
+        color: #004085;
+      }
+
+      .badge-lime {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .btn-disabled {
+        background-color: #d6d6d6;
+        color: #6c757d;
+        cursor: not-allowed;
+      }
+
+      .btn-soledad {
+        background-color: #f8d7da;
+        color: #721c24;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">CRM</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul
+          class="navbar-nav align-items-center d-flex justify-content-between w-100"
+        >
+          <div class="d-flex">
+            <li class="nav-item">
+              <a class="nav-link" href="./index.html">Campañas</a>
+            </li>
+          </div>
+          <div>
+            <!-- Usuario logueado -->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle d-flex align-items-center"
+                href="#"
+                id="userDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <img
+                  src="https://i.pravatar.cc/40?img=3"
+                  alt="Avatar"
+                  class="rounded-circle mr-2"
+                  width="32"
+                  height="32"
+                />
+                <span>Operador C.Unix</span>
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="userDropdown"
+              >
+                <a class="dropdown-item" href="#">Mi perfil</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Cerrar sesión</a>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h4>Campaña de autoasignación de contactos</h4>
+      <br />
+      <h1 class="mb-4">Reactivación de socios</h1>
+
+      <!-- Contadores -->
+      <div class="d-flex justify-content-between mb-4">
+        <div>
+          <strong>Re-Llamar pendientes:</strong>
+          <span id="rellamarPendientes">0</span>
+        </div>
+        <div>
+          <strong>Contactos restantes:</strong>
+          <span id="contactosRestantes">0</span>
+        </div>
+        <div>
+          <strong>Contactos atendidos:</strong>
+          <span id="contactosAtendidos">0</span>
+        </div>
+      </div>
+
+      <!-- Card del contacto actual -->
+      <div id="contactoActualCard" class="card mb-4" style="display: none">
+        <div
+          id="cardHeader"
+          class="card-header d-flex justify-content-between align-items-center bg-info text-white"
+        >
+          <h5>Contacto asignado</h5>
+        </div>
+        <div class="card-body">
+          <p>
+            <strong>Nombre y apellido:</strong>
+            <span id="contactoNombre">Nombre del Contacto</span>
+          </p>
+          <!-- <p><strong>Apellido:</strong> <span id="contactoApellido"></span></p> -->
+          <p><strong>DNI:</strong> <span id="contactoDNI"></span></p>
+          <p>
+            <strong>Fecha de Nacimiento:</strong>
+            <span id="contactoFechaNacimiento"></span>
+          </p>
+          <!-- Información adicional para contactos de Re-Llamar -->
+          <div
+            id="rellamarInfo"
+            style="display: none; border: 1px solid #ccc; text-align: center"
+          >
+            <p>
+              <strong>Descripción:</strong>
+              <span id="contactoDescripcion"></span>
+            </p>
+            <p>
+              <strong>Horario de Llamada:</strong>
+              <span id="contactoHoraLlamar"></span>
+            </p>
+          </div>
+          <button class="btn btn-success mt-3 w-100" onclick="llamarContacto()">
+            Llamar
+          </button>
+          <button class="btn btn-primary mt-3 w-100" onclick="abrirModal()">
+            Registrar Incidencia
+          </button>
+        </div>
+      </div>
+
+      <!-- Mensaje de no hay más contactos -->
+      <div id="sinContactos" class="alert alert-warning" style="display: none">
+        No hay más contactos disponibles.
+      </div>
+
+      <!-- Botón de pausa -->
+      <!-- <button id="pausarFlujo" class="btn btn-danger" onclick="togglePausa()">
+        Pausar Flujo
+      </button> -->
+    </div>
+
+    <!-- Modal para gestionar -->
+    <div
+      class="modal fade"
+      id="gestionarModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="gestionarModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-info text-white">
+            <h5 class="modal-title" id="gestionarModalLabel">
+              Registrar Llamada
+            </h5>
+            <button
+              type="button"
+              class="close text-white"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="gestionarForm">
+              <div class="form-group">
+                <label for="contacto">Contacto:</label>
+                <select
+                  class="form-control"
+                  id="contacto"
+                  required
+                  onchange="mostrarHoraInput(this.value)"
+                >
+                  <option value="finalizar">Finalizar</option>
+                  <option value="llamar_mas_tarde">Llamar Más Tarde</option>
+                </select>
+              </div>
+              <div class="form-group" id="horaInputGroup" style="display: none">
+                <label for="horaLlamar">Fecha y Hora para Llamar:</label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  id="horaLlamar"
+                />
+              </div>
+              <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea
+                  class="form-control"
+                  id="descripcion"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="guardarGestion()"
+              >
+                Guardar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer>
+      let contactoActual = null;
+      // Arrays para manejar dinámicamente las filas de las tablas
+      let contactosAsignados = [
+        {
+          id: 193484,
+          nombre: "ESTELITA",
+          apellido: "SUAREZ",
+          dni: "36535555",
+          fechaNacimiento: "01-06-1992",
+          operador: "SOLEDAD",
+        },
+        {
+          id: 193485,
+          nombre: "VIRGINIA",
+          apellido: "FALON",
+          dni: "36535555",
+          fechaNacimiento: "01-06-1992",
+          operador: "TOMAR CONTACTO",
+        },
+        {
+          id: 193496,
+          nombre: "CIRO",
+          apellido: "ALEKSANDROFF",
+          dni: "52181319",
+          fechaNacimiento: "17-06-2012",
+          operador: "TOMAR CONTACTO",
+        },
+        {
+          id: 193497,
+          nombre: "GINO",
+          apellido: "ALEKSANDROFF",
+          dni: "37617543",
+          fechaNacimiento: "17-05-1993",
+          operador: "TOMAR CONTACTO",
+        },
+        {
+          id: 193498,
+          nombre: "LUCIA",
+          apellido: "MARTINEZ",
+          dni: "40123456",
+          fechaNacimiento: "12-03-1995",
+          operador: "TOMAR CONTACTO",
+        },
+        // {
+        //   id: 193499,
+        //   nombre: "MARIO",
+        //   apellido: "GUTIERREZ",
+        //   dni: "38987654",
+        //   fechaNacimiento: "25-09-1988",
+        //   operador: "TOMAR CONTACTO",
+        // },
+        // {
+        //   id: 193500,
+        //   nombre: "CARLA",
+        //   apellido: "LOPEZ",
+        //   dni: "41234567",
+        //   fechaNacimiento: "08-11-1990",
+        //   operador: "TOMAR CONTACTO",
+        // },
+        // {
+        //   id: 193501,
+        //   nombre: "JUAN",
+        //   apellido: "PEREZ",
+        //   dni: "37891234",
+        //   fechaNacimiento: "15-07-1985",
+        //   operador: "TOMAR CONTACTO",
+        // },
+        // {
+        //   id: 193502,
+        //   nombre: "SOFIA",
+        //   apellido: "RAMIREZ",
+        //   dni: "39876543",
+        //   fechaNacimiento: "03-02-1993",
+        //   operador: "TOMAR CONTACTO",
+        // },
+        // {
+        //   id: 193503,
+        //   nombre: "DIEGO",
+        //   apellido: "FERNANDEZ",
+        //   dni: "38765432",
+        //   fechaNacimiento: "20-10-1987",
+        //   operador: "TOMAR CONTACTO",
+        // },
+      ];
+      let contactosAtendidos = 0;
+      let pausa = false;
+
+      // Mostrar el siguiente contacto
+
+      function llamarContacto() {
+        alert(
+          `Llamando a ${contactoActual.nombre} ${contactoActual.apellido}...`
+        );
+        // Aquí puedes agregar la lógica para realizar la llamada
+      }
+
+      function mostrarSiguienteContacto() {
+        if (pausa) return;
+
+        if (contactosAsignados.length === 0) {
+          document.getElementById("contactoActualCard").style.display = "none";
+          document.getElementById("sinContactos").style.display = "block";
+          return;
+        }
+
+        // Obtener el siguiente contacto
+        contactoActual = contactosAsignados.shift();
+
+        // Actualizar la card con los datos del contacto actual
+        document.getElementById("contactoNombre").textContent =
+          contactoActual.nombre + " " + contactoActual.apellido;
+
+        document.getElementById("contactoDNI").textContent = contactoActual.dni;
+        document.getElementById("contactoFechaNacimiento").textContent =
+          contactoActual.fechaNacimiento;
+
+        // Mostrar información adicional si es un contacto de "Llamar Más Tarde"
+        if (contactoActual.horaLlamar) {
+          document.getElementById("rellamarInfo").style.display = "block";
+          document.getElementById("contactoDescripcion").textContent =
+            contactoActual.descripcion || "Sin descripción";
+          document.getElementById("contactoHoraLlamar").textContent =
+            contactoActual.horaLlamar;
+
+          // Cambiar el estilo de la card para destacar que es una re-llamada
+          document.getElementById("cardHeader").classList.remove("bg-info");
+          document.getElementById("cardHeader").classList.add("bg-warning");
+          document.getElementById("cardHeader").classList.add("text-dark");
+        } else {
+          document.getElementById("rellamarInfo").style.display = "none";
+
+          // Restaurar el estilo de la card para contactos normales
+          document.getElementById("cardHeader").classList.remove("bg-warning");
+          document.getElementById("cardHeader").classList.remove("text-dark");
+          document.getElementById("cardHeader").classList.add("bg-info");
+          document.getElementById("cardHeader").classList.add("text-white");
+        }
+
+        document.getElementById("contactoActualCard").style.display = "block";
+        document.getElementById("sinContactos").style.display = "none";
+
+        actualizarContadores();
+      }
+
+      // Guardar la gestión
+      function guardarGestion() {
+        const contacto = document.getElementById("contacto").value;
+        const descripcion = document.getElementById("descripcion").value;
+
+        if (contacto === "llamar_mas_tarde") {
+          const horaLlamar = document
+            .getElementById("horaLlamar")
+            .value.split("T")[1];
+          contactosAsignados.push({
+            ...contactoActual,
+            horaLlamar,
+            descripcion, // Agregar la descripción al contacto
+          });
+        }
+
+        contactosAtendidos++;
+        $("#gestionarModal").modal("hide");
+        mostrarSiguienteContacto();
+      }
+
+      // Mostrar input de hora si se selecciona "Llamar Más Tarde"
+      function mostrarHoraInput(value) {
+        document.getElementById("horaInputGroup").style.display =
+          value === "llamar_mas_tarde" ? "block" : "none";
+      }
+
+      // Pausar o reanudar el flujo
+      function togglePausa() {
+        pausa = !pausa;
+        document.getElementById("pausarFlujo").textContent = pausa
+          ? "Reanudar Flujo"
+          : "Pausar Flujo";
+        if (!pausa) mostrarSiguienteContacto();
+      }
+
+      // Actualizar contadores
+      function actualizarContadores() {
+        // Total de contactos restantes
+        document.getElementById("contactosRestantes").textContent =
+          contactosAsignados.length;
+
+        // Total de contactos atendidos
+        document.getElementById("contactosAtendidos").textContent =
+          contactosAtendidos;
+
+        // Total de contactos de "Re-Llamar"
+        const rellamarPendientes = contactosAsignados.filter(
+          (contacto) => contacto.horaLlamar
+        ).length;
+        document.getElementById("rellamarPendientes").textContent =
+          rellamarPendientes;
+      }
+
+      // Inicializar
+      mostrarSiguienteContacto();
+
+      function abrirModal() {
+        // Reiniciar los campos del formulario
+        document.getElementById("gestionarForm").reset();
+        document.getElementById("horaInputGroup").style.display = "none"; // Ocultar el input de hora
+
+        // Mostrar el modal
+        $("#gestionarModal").modal("show");
+      }
+    </script>
+  </body>
+</html>
