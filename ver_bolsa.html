@@ -210,8 +210,7 @@
               <div class="form-group">
                 <label for="contacto">Contacto:</label>
                 <select class="form-control" id="contacto" required>
-                  <option disabled value="contactado">Contactado</option>
-                  <option disabled value="no_contactado">No Contactado</option>
+                  <option value="finalizar">Finalizar</option>
                   <option value="llamar_mas_tarde">Llamar Más Tarde</option>
                 </select>
               </div>
@@ -402,7 +401,14 @@
           const contacto = document.getElementById("contacto").value;
           const comentario = document.getElementById("descripcion").value;
 
-          if (contacto === "llamar_mas_tarde" && table === "llamar") {
+          if (contacto === "finalizar") {
+            // Eliminar el socio de la tabla correspondiente
+            if (table === "llamar") {
+              sociosPorLlamar.splice(index, 1);
+            } else if (table === "rellamar") {
+              sociosPorRellamar.splice(index, 1);
+            }
+          } else if (contacto === "llamar_mas_tarde" && table === "llamar") {
             // Mover el socio a la tabla de "Socios por Rellamar"
             const socio = sociosPorLlamar.splice(index, 1)[0];
             socio.operador = "TOMAR CONTACTO"; // Cambiar operador a "TOMAR CONTACTO"
